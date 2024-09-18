@@ -170,24 +170,41 @@ def delete_contact(phonebook):
     phonebook.delete_contact(full_name)
 
 
-'''Batch add contacts from an input CSV file. File must be placed in the data folder'''
+'''Batch add contacts from an input CSV file. File must be placed in the data folder.'''
 def batch_add_contacts(phonebook):
-    filename = input("Place your CSV file in the 'data' folder and enter the name of the file (e.g: testing.csv): ")
-    filepath = os.path.join('data', filename)
-    if os.path.exists(filepath):
-        phonebook.batch_add_contacts(filename)
-    else:
-        print(f"{RED}Error: File not found in the 'data' folder.{RESET}")
+    while True:
+        filename = input("Place your CSV file in the 'data' folder and enter the name of the file (e.g: testing.csv): ").strip()
 
+        # Check for empty input
+        if not filename:
+            print(f"{RED}Error: No file name entered. Please provide a valid file name.{RESET}")
+            continue  # Prompt the user again
+        
+        filepath = os.path.join('data', filename)
+        
+        if os.path.isfile(filepath):
+            phonebook.batch_add_contacts(filename)
+            break  # Exit the loop after successful operation
+        else:
+            print(f"{RED}Error: File '{filename}' not found in the 'data' folder. Please check the file name and try again.{RESET}")
 
-'''Batch delete contacts from an input CSV file. File must be placed in the data folder'''
+'''Batch delete contacts from an input CSV file. File must be placed in the data folder.'''
 def batch_delete_contacts(phonebook):
-    filename = input("Place your CSV file in the 'data' folder and enter the name of the file (e.g: testing.csv): ")
-    filepath = os.path.join('data', filename)
-    if os.path.exists(filepath):
-        phonebook.batch_delete_contacts(filename)
-    else:
-        print(f"{RED}Error: File not found in the 'data' folder.{RESET}")
+    while True:
+        filename = input("Place your CSV file in the 'data' folder and enter the name of the file (e.g: testing.csv): ").strip()
+
+        # Check for empty input
+        if not filename:
+            print(f"{RED}Error: No file name entered. Please provide a valid file name.{RESET}")
+            continue  # Prompt the user again
+        
+        filepath = os.path.join('data', filename)
+        
+        if os.path.isfile(filepath):
+            phonebook.batch_delete_contacts(filename)
+            break  # Exit the loop after successful operation
+        else:
+            print(f"{RED}Error: File '{filename}' not found in the 'data' folder. Please check the file name and try again.{RESET}")
 
 
 '''Sort contacts alphabetically by last name.'''
